@@ -6,10 +6,13 @@ export default defineNuxtConfig({
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css'
   ],
+
   ssr: false,
+
   build: {
     transpile: ['vuetify']
   },
+
   vite: {
     vue: {
       template: {
@@ -26,14 +29,15 @@ export default defineNuxtConfig({
       'process.env-DEBUG': false,
     },
   },
-    modules: [
-      '@pinia/nuxt',
-      async (_options, nuxt) => {
-        nuxt.hooks.hook('vite:extendConfig', (config) => {
-          config.plugins.push(vuetify({autoImport: true}));
-        });
-      }
-    ]
-        compatibilityDate: '2024-11-01',
+  modules: [
+    '@pinia/nuxt',
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+  ],
 
-  })
+  compatibilityDate: '2025-01-03'
+})

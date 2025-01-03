@@ -1,65 +1,65 @@
 import { defineStore } from 'pinia';
 
-export const useUserStore = defineStore('user', {
+export const useDepartmentStore = defineStore('department', {
     state: () => ({
-        users: [],
-        user: null,
+        departments: [],
+        department: null,
     }),
     actions: {
-        async fetchUsers() {
+        async fetchDepartments() {
             try {
-                const response = await useFetch('/api/users');
-                this.users = response.data;
+                const response = await useFetch('/api/departments');
+                this.departments = response.data;
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching departments:', error);
             }
         },
-        async fetchUser(id) {
+        async fetchDepartment(id) {
             try {
-                const response = await useFetch(`/api/users/${id}`);
-                this.user = response.data;
+                const response = await useFetch(`/api/departments/${id}`);
+                this.department = response.data;
             } catch (error) {
-                console.error('Error fetching user:', error);
+                console.error('Error fetching department:', error);
             }
         },
-        async createUser(userData) {
+        async createDepartment(departmentData) {
             try {
                 const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData),
+                    body: JSON.stringify(departmentData),
                 };
-                const response = await $fetch('/api/users', requestOptions);
-                this.users.push(response.data);
+                const response = await $fetch('/api/departments', requestOptions);
+                this.departments.push(response.data);
             } catch (error) {
-                console.error('Error creating user:', error);
+                console.error('Error creating department:', error);
             }
         },
-        async updateUser(id, userData) {
+        async updateDepartment(id, departmentData) {
             try {
                 const requestOptions = {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData),
+                    body: JSON.stringify(departmentData),
                 };
-                const response = await $fetch(`/api/users/${id}`, requestOptions);
-                const index = this.users.findIndex(user => user.id === id);
+                const response = await $fetch(`/api/departments/${id}`, requestOptions);
+                const index = this.departments.findIndex(department => department.id === id);
                 if (index !== -1) {
-                    this.users[index] = response.data;
+                    this.departments[index] = response.data;
                 }
             } catch (error) {
-                console.error('Error updating user:', error);
+                console.error('Error updating department:', error);
             }
         },
-        async deleteUser(id) {
+        async deleteDepartment(id) {
             try {
                 const requestOptions = {
                     method: 'DELETE',
                 };
-                await $fetch(`/api/users/${id}`, requestOptions);
-                this.users = this.users.filter(user => user.id !== id);
+                await $fetch(`/api/departments/${id}`, requestOptions);
+                this.departments = this.departments.filter(department => department.id !== id);
             } catch (error) {
-                console.error('Error deleting user:', error);
+                console.error('Error deleting department:', error);
             }
         },
     },
