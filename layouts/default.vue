@@ -6,15 +6,15 @@
     </v-app-bar>
     <v-main>
 
-        <v-navigation-drawer app :model-value="drawer" clipped :expand-on-hover="true">
+        <v-navigation-drawer app :model-value="drawer" clipped >
             <v-list>
-                <v-list-item>
-                        <v-icon>mdi-home</v-icon>
-                    <v-list-item-title>Home</v-list-item-title>
-                </v-list-item>
-                <v-list-item>
+                <v-list-item to="/users">
                         <v-icon>mdi-account</v-icon>
-                    <v-list-item-title>Profile</v-list-item-title>
+                        Users
+                </v-list-item>
+                <v-list-item to="/departments">
+                        <v-icon>mdi-briefcase</v-icon>
+                        Departments
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
@@ -31,7 +31,7 @@ export default {
     },
     data() {
         return {
-            drawer: false
+            drawer: true
         }
     }
 }

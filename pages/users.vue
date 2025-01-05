@@ -17,7 +17,16 @@
 </template>
 
 <script>
+import { useUserStore } from '~/store/userstore';
 export default {
+    setup() {
+        const userStore = useUserStore();
+        userStore.fetchUsers();
+
+        return {
+            users: userStore.users,
+        };
+    },
     name: 'Users',
     data() {
         return {
@@ -27,11 +36,11 @@ export default {
                 { text: 'Age', value: 'age' },
                 { text: 'Department', value: 'department' },
             ],
-            users: [
-                { firstname: 'John', surname: 'Doe', age: 30, department: 'HR' },
-                { firstname: 'Jane', surname: 'Smith', age: 25, department: 'IT' },
-                // Add more users as needed
-            ],
+            // users: [
+            //     { firstname: 'John', surname: 'Doe', age: 30, department: 'HR' },
+            //     { firstname: 'Jane', surname: 'Smith', age: 25, department: 'IT' },
+            //     // Add more users as needed
+            // ],
         };
     },
 };

@@ -1,21 +1,25 @@
-import { ref } from 'vue';
+
 
 export function useCustomFetch(url, method, body, options = {}) {
-    const config = useRuntimeConfig();
+    if (!method) {
+        method = 'GET';
+    }
+    const config = useRuntimeConfig().public;
     var requestOptions = {
         method: method,
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
     };
-    url = new URL(config.backendURL + url);
-    if(options.query && Object.keys(options.query).length > 0){
-        const urlObj = new URL(url);
-        Object.keys(options.query).forEach(key => url.searchParams.append(key, options.query[key]));
-        url = urlObj.toString();
-    } else {
-        url = url.toString();
-    }
+    console.log('url:', url);
+    // url = new URL('/api' + url);
+    // if(options.query && Object.keys(options.query).length > 0){
+    //     const urlObj = new URL(url);
+    //     Object.keys(options.query).forEach(key => url.searchParams.append(key, options.query[key]));
+    //     url = urlObj.toString();
+    // } else {
+    //     url = url.toString();
+    // }
     if(body){
         requestOptions = {
             method: method,
@@ -25,7 +29,9 @@ export function useCustomFetch(url, method, body, options = {}) {
             body: body,
         };
     }
-    return useCustomFetch(url, requestOptions, {
+    url = url.toString();
+    url = "/api" + url;
+    return useFetch(url, requestOptions, {
         options,
         async onResponseError({request,response,options}){
             console.error('Error fetching data:', response);

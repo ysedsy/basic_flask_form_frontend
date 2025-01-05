@@ -4,7 +4,7 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
   runtimeConfig: {
     public:{
-      backendURL: process.env.BACKEND_URL
+      backendURL: process.env.BACKEND_ADRESS
     }
   },
   css: [
@@ -17,7 +17,14 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify']
   },
-
+  nitro: {
+    devProxy:{
+      '/api': {
+        target: 'http://localhost:9999',
+        prependPath:true
+      },
+  }
+  },
   vite: {
     vue: {
       template: {
@@ -25,6 +32,7 @@ export default defineNuxtConfig({
       }
     },
     server: {
+      port: 4000,
       hmr: {
         protocol: 'ws',
         host: 'localhost',
