@@ -2,13 +2,13 @@ import { defineStore } from 'pinia';
 
 export const useDepartmentStore = defineStore('department', {
     state: () => ({
-        departments: [],
-        department: null,
+        _departments: [],
+        _department: null,
     }),
     actions: {
         async fetchDepartments() {
             try {
-                const response = await useFetch('/api/departments');
+                const response = await useCustomFetch('/departments');
                 this.departments = response.data;
             } catch (error) {
                 console.error('Error fetching departments:', error);
@@ -16,7 +16,7 @@ export const useDepartmentStore = defineStore('department', {
         },
         async fetchDepartment(id) {
             try {
-                const response = await useFetch(`/api/departments/${id}`);
+                const response = await useCustomFetch(`/api/departments/${id}`);
                 this.department = response.data;
             } catch (error) {
                 console.error('Error fetching department:', error);

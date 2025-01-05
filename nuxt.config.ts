@@ -2,6 +2,11 @@
 
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public:{
+      backendURL: process.env.BACKEND_URL
+    }
+  },
   css: [
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css'

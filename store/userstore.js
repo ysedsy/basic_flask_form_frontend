@@ -2,13 +2,13 @@ import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        users: [],
-        user: null,
+        _users: [],
+        _user: null,
     }),
     actions: {
         async fetchUsers() {
             try {
-                const response = await useFetch('/api/users');
+                const response = await useCustomFetch('/api/users');
                 this.users = response.data;
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -16,7 +16,7 @@ export const useUserStore = defineStore('user', {
         },
         async fetchUser(id) {
             try {
-                const response = await useFetch(`/api/users/${id}`);
+                const response = await useCustomFetch(`/api/users/${id}`);
                 this.user = response.data;
             } catch (error) {
                 console.error('Error fetching user:', error);
