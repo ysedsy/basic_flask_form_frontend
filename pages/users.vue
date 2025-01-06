@@ -16,9 +16,9 @@
                             </v-card-title>
                             <v-card-text>
                                 <v-form ref="form" @submit.prevent="validate">
-                                    <v-text-field v-model="editedItem.name" label="Shortname"
+                                    <v-text-field v-model="editedItem.name" label="First Name"
                                         :rules="rules"></v-text-field>
-                                    <v-text-field v-model="editedItem.surname" label="Fullname"
+                                    <v-text-field v-model="editedItem.surname" label="Last Name"
                                         :rules="rules"></v-text-field>
                                     <v-text-field v-model="editedItem.age" label="Age" :rules="rules"></v-text-field>
                                     <v-autocomplete v-model="editedItem.department_shortname" label="Department"
