@@ -32,14 +32,13 @@ export default defineNuxtConfig({
       }
     },
     server: {
-      port: 4000,
       hmr: {
         protocol: 'ws',
         host: 'localhost',
       },
     },
     define: {
-      'process.env-DEBUG': false,
+      'process.env.DEBUG': false,
     },
   },
   modules: [

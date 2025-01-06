@@ -8,7 +8,7 @@ export const useUserStore = defineStore('user', {
     actions: {
         async fetchUsers() {
             try {
-                const response = await useCustomFetch('/users');
+                const response = await useFetch('http://localhost:9999/api/users');
                 this.users = response.data;
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -16,7 +16,7 @@ export const useUserStore = defineStore('user', {
         },
         async fetchUser(id) {
             try {
-                const response = await useCustomFetch(`/users/${id}`);
+                const response = await useFetch(`http://localhost:9999/api/users/${id}`);
                 this.user = response.data;
             } catch (error) {
                 console.error('Error fetching user:', error);
@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData),
                 };
-                const response = await $fetch('/users', requestOptions);
+                const response = await $fetch('http://localhost:9999/api/users', requestOptions);
                 this.users.push(response.data);
             } catch (error) {
                 console.error('Error creating user:', error);
@@ -42,7 +42,7 @@ export const useUserStore = defineStore('user', {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData),
                 };
-                const response = await $fetch(`/users/${id}`, requestOptions);
+                const response = await $fetch(`http://localhost:9999/api/users/${id}`, requestOptions);
                 const index = this.users.findIndex(user => user.id === id);
                 if (index !== -1) {
                     this.users[index] = response.data;
@@ -56,7 +56,7 @@ export const useUserStore = defineStore('user', {
                 const requestOptions = {
                     method: 'DELETE',
                 };
-                await $fetch(`/users/${id}`, requestOptions);
+                await $fetch(`http://localhost:9999/api/users/${id}`, requestOptions);
                 this.users = this.users.filter(user => user.id !== id);
             } catch (error) {
                 console.error('Error deleting user:', error);

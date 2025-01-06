@@ -9,6 +9,9 @@ export function useCustomFetch(url, method, body, options = {}) {
         method: method,
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
     };
     console.log('url:', url);
@@ -25,6 +28,9 @@ export function useCustomFetch(url, method, body, options = {}) {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
             },
             body: body,
         };

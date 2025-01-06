@@ -18,23 +18,26 @@
 
 <script>
 import { useUserStore } from '~/store/userstore';
+import { storeToRefs } from 'pinia';
 export default {
     setup() {
         const userStore = useUserStore();
-        userStore.fetchUsers();
+        const { fetchUsers } = userStore;
+        const { users } = storeToRefs(userStore);
 
+        fetchUsers();
         return {
-            users: userStore.users,
+            users
         };
     },
     name: 'Users',
     data() {
         return {
             headers: [
-                { text: 'First Name', value: 'firstname' },
-                { text: 'Last Name', value: 'surname' },
-                { text: 'Age', value: 'age' },
-                { text: 'Department', value: 'department' },
+                { title: 'First Name', value: 'name' },
+                { title: 'Last Name', value: 'surname' },
+                { title: 'Age', value: 'age' },
+                { title: 'Department', value: 'department.shortname' },
             ],
             // users: [
             //     { firstname: 'John', surname: 'Doe', age: 30, department: 'HR' },

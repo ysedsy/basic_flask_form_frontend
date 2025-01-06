@@ -8,7 +8,7 @@ export const useDepartmentStore = defineStore('department', {
     actions: {
         async fetchDepartments() {
             try {
-                const response = await useCustomFetch('/departments');
+                const response = await useFetch('http://localhost:9999/api/departments');
                 this.departments = response.data;
             } catch (error) {
                 console.error('Error fetching departments:', error);
@@ -16,7 +16,7 @@ export const useDepartmentStore = defineStore('department', {
         },
         async fetchDepartment(id) {
             try {
-                const response = await useCustomFetch(`/departments/${id}`);
+                const response = await useFetch(`http://localhost:9999/api/departments/${id}`);
                 this.department = response.data;
             } catch (error) {
                 console.error('Error fetching department:', error);
@@ -29,7 +29,7 @@ export const useDepartmentStore = defineStore('department', {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(departmentData),
                 };
-                const response = await $fetch('/departments', requestOptions);
+                const response = await $fetch('http://localhost:9999/api/departments', requestOptions);
                 this.departments.push(response.data);
             } catch (error) {
                 console.error('Error creating department:', error);
@@ -42,7 +42,7 @@ export const useDepartmentStore = defineStore('department', {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(departmentData),
                 };
-                const response = await $fetch(`/departments/${id}`, requestOptions);
+                const response = await $fetch(`http://localhost:9999/api/departments/${id}`, requestOptions);
                 const index = this.departments.findIndex(department => department.id === id);
                 if (index !== -1) {
                     this.departments[index] = response.data;
@@ -56,7 +56,7 @@ export const useDepartmentStore = defineStore('department', {
                 const requestOptions = {
                     method: 'DELETE',
                 };
-                await $fetch(`/departments/${id}`, requestOptions);
+                await $fetch(`http://localhost:9999/api/departments/${id}`, requestOptions);
                 this.departments = this.departments.filter(department => department.id !== id);
             } catch (error) {
                 console.error('Error deleting department:', error);

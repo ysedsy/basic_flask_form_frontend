@@ -17,18 +17,27 @@
 </template>
 
 <script>
+import { useDepartmentStore } from '~/store/departmentstore';
+import { storeToRefs } from 'pinia';
 export default {
+    
     name: 'Departments',
+    setup(){
+        const departmentStore = useDepartmentStore();
+        const {fetchDepartments} = departmentStore;
+        const {departments} = storeToRefs(departmentStore);
+
+        fetchDepartments();
+
+        return {
+            departments
+        };
+    },
     data() {
         return {
             headers: [
-                { text: 'First Name', value: 'shortname' },
-                { text: 'Last Name', value: 'fullname' },
-            ],
-            departments: [
-                { shortname: 'John', fullname: 'Doe', age: 30, department: 'HR' },
-                { shortname: 'Jane', fullname: 'Smith', age: 25, department: 'IT' },
-                // Add more departments as needed
+                { title: 'Shortname', value: 'shortname' },
+                { title: 'Fullname', value: 'fullname' },
             ],
         };
     },
